@@ -21,3 +21,11 @@ desiredState:
         containers:
           - name: octo-master
             image: octoblu/octo-master:$SHORT_COMMIT
+            volume:
+              - name: kubernetes-config
+                mountPath: /root/.kube
+        volumes:
+          - name: kubernetes-config
+            source:
+              hostDir:
+                path: /data/read-only/kubernetes
