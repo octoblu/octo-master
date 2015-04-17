@@ -8,8 +8,7 @@ REPLACE_REGEX='s;(\\*)(\$([a-zA-Z_][a-zA-Z_0-9]*)|\$\{([a-zA-Z_][a-zA-Z_0-9]*)\}
 
 mkdir -p dpl_cd_upload/docker-builder dpl_cd_upload/octo-master
 perl -pe $REPLACE_REGEX .kubernetes/deploy/appspec.yml.tmpl > .kubernetes/deploy/appspec.yml
-perl -pe $REPLACE_REGEX .kubernetes/deploy/octo-master-blue-controller.yaml.tmpl > .kubernetes/deploy/octo-master-blue-controller.yaml
-perl -pe $REPLACE_REGEX .kubernetes/deploy/octo-master-green-controller.yaml.tmpl > .kubernetes/deploy/octo-master-green-controller.yaml
+perl -pe $REPLACE_REGEX .kubernetes/deploy/octo-master-controller.yaml.tmpl > .kubernetes/deploy/octo-master-controller.yaml
 perl -pe $REPLACE_REGEX .kubernetes/docker-builder/appspec.yml.tmpl > .kubernetes/docker-builder/appspec.yml
 perl -pe $REPLACE_REGEX .kubernetes/docker-builder/docker-builder-pod.yaml.tmpl > .kubernetes/docker-builder/docker-builder-pod.yaml
 zip -jr dpl_cd_upload/octo-master/octo-master-$TRAVIS_COMMIT.zip .kubernetes/deploy/*
