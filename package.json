@@ -1,0 +1,18 @@
+{
+  "name": "octo-master",
+  "repository": "octoblu/octo-master",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node command.js",
+    "test": "exit 0"
+  },
+  "dependencies": {
+    "coffee-script": "^1.8.0",
+    "meshblu": "^1.9.0",
+    "debug": "^2.1.0"
+  },
+  "keywords": [
+    "meshblu-connector",
+    "gateblu"
+  ]
+}
