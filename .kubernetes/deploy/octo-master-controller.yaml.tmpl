@@ -24,6 +24,15 @@ desiredState:
             volume:
               - name: kubernetes-config
                 mountPath: /root/.kube
+            env:
+              - name: MESHBLU_DEVICE_UUID
+                value: "$MESHBLU_DEVICE_UUID"
+              - name: MESHBLU_DEVICE_TOKEN
+                value: "$MESHBLU_DEVICE_TOKEN"
+              - name: MESHBLU_SERVER
+                value: "$MESHBLU_SERVER"
+              - name: MESHBLU_PORT
+                value: "$MESHBLU_PORT"
         volumes:
           - name: kubernetes-config
             source:

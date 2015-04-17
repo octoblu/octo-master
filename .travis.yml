@@ -15,8 +15,12 @@ env:
   - DEPLOY_BUCKET=octoblu-deploy
   - DEPLOYMENT_GROUP=master
   - DEPLOY_KEY=octo-master/octo-master-$TRAVIS_COMMIT.zip
+  - MESHBLU_SERVER=meshblu.octoblu.com
+  - MESHBLU_PORT=443
+  - MESHBLU_DEVICE_UUID=bb834050-e546-11e4-869f-8d68b2238a65
   - secure: Tcmtp5MyDyniTSta4STysL3no45OK2KlJGM1U0Sp1S1Gr5oCe/gbms5AxTQjTWgvbkIAVVKveigWPYGvisSG52OYeg50k5c4DuznKqH2v2ZoOianDCsb4qwdyNNr+qARUvgW7Jbv2HF9+vM8jXSAzaXMGkpgbi3IgwBv8Kkf5iE=
   - secure: hCzA7I2oPX+J1Gzs9+cND8NYPSIsTHdKviHAPkXpuYIGHpxPlITUK4JrGFpRhgt99xz0ncF8BR4HT6aFxvTctCSw8Owrbw+YCD4zmIjQlkzFnb9th/AjHKkaj+bmiitPLTy+jPFD6E1AVXFri29eAg8Sx1JX0jzwzgb9HY16vAQ=
+  - secure: Y2KDjdW3JvriYrRkwzFwPRd/OyO+3ZSXb8iHYjvp85xF97ZGKTkye5Wyvs75mx5ynbM9omZYYFCAbpezkAtm6XU8yn5d2D17DTfGG9hcq98tNVxqhI6CGXrl8PtwQXXH+COwDqM6T7Jh153JeNl/o+wspGqwDILVL7TvpRUjxKE=
 after_success:
 - .kubernetes/travis_after_success
 deploy:
