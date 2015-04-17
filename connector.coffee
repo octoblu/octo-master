@@ -1,4 +1,5 @@
 meshblu  = require 'meshblu'
+debug    = require('debug')('octo-master:connector')
 {Plugin} = require './index'
 
 Connector = (config) ->
@@ -18,7 +19,8 @@ Connector = (config) ->
 
   plugin = new Plugin();
 
-  conx.on 'ready', ->
+  conx.on 'ready', (me) ->
+    debug 'ready', me
     conx.whoami uuid: config.uuid, (device) ->
       plugin.setOptions device.options
       conx.update

@@ -6,19 +6,14 @@ debug          = require('debug')('octo-master')
 MESSAGE_SCHEMA =
   type: 'object'
   properties:
-    exampleBoolean:
-      type: 'boolean'
+    uuid:
+      type: 'string'
       required: true
-    exampleString:
+    token:
       type: 'string'
       required: true
 
-OPTIONS_SCHEMA =
-  type: 'object'
-  properties:
-    firstExampleOption:
-      type: 'string'
-      required: true
+OPTIONS_SCHEMA = {}
 
 class Plugin extends EventEmitter
   constructor: ->
