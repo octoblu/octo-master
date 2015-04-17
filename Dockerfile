@@ -14,4 +14,4 @@ COPY . /usr/src/app
 
 ENV PATH $PATH:/opt/kubernetes/cluster
 
-CMD ["kubectl.sh", "get", "pods", "--kubeconfig=/root/.kube/kubeconfig"]
+CMD ["npm", "start"]
