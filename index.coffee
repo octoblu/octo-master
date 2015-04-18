@@ -1,7 +1,8 @@
 'use strict';
 util           = require 'util'
 {EventEmitter} = require 'events'
-debug          = require('debug')('octo-master')
+debug          = require('debug')('octo-master:index')
+GatebluContainer = require './gateblu-container'
 
 MESSAGE_SCHEMA =
   type: 'object'
@@ -22,12 +23,10 @@ class Plugin extends EventEmitter
     @optionsSchema = OPTIONS_SCHEMA
 
   onMessage: (message) =>
-    payload = message.payload;
-    response =
-      devices: ['*']
-      topic: 'echo'
-      payload: payload
-    this.emit 'message', response
+    {uuid,token} = message.payload
+
+    gatebluContainer = new GatebluContainer uuid: uuid, token: token
+    gatebluContainer.start()
 
   onConfig: (device) =>
     @setOptions device.options
