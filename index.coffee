@@ -19,6 +19,7 @@ OPTIONS_SCHEMA = {}
 COMMANDS =
   'create-octo': 'create'
   'delete-octo': 'delete'
+  'generate': 'generate'
 
 class Plugin extends EventEmitter
   constructor: ->

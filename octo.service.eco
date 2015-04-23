@@ -1,0 +1,15 @@
+[Unit]
+Description=Octo Instance
+After=docker.service
+Requires=docker.service
+
+[Service]
+TimeoutStartSec=300
+ExecStartPre=-/usr/bin/docker kill octo-<%= @uuid %>
+ExecStartPre=-/usr/bin/docker rm octo-<%= @uuid %>
+ExecStartPre=/usr/bin/docker pull octoblu/gateblu-forever
+ExecStart=/usr/bin/docker run \
+  --name octo-<%= @uuid %> \
+  -e MESHBLU_UUID=<%= @uuid %> \
+  -e MESHBLU_TOKEN=<%= @token %> \
+  octoblu/gateblu-forever

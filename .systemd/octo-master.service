@@ -1,0 +1,20 @@
+[Unit]
+Description=Octo Master
+After=docker.service
+Requires=docker.service
+
+[Service]
+TimeoutStartSec=300
+ExecStartPre=-/usr/bin/docker kill octo-master
+ExecStartPre=-/usr/bin/docker rm octo-master
+ExecStartPre=/usr/bin/docker pull octoblu/octo-master
+ExecStart=/usr/bin/docker run \
+  --name octo-master \
+  -v /var/run/fleet.sock:/var/run/fleet.sock \
+  -e DEBUG=octo-master* \
+  -e MESHBLU_DEVICE_UUID=fc6da000-dd81-11e4-b399-ab04e144916d \
+  -e MESHBLU_DEVICE_TOKEN=f5e95ef1a9f03c049cae544ae3e47f3df08dfb8a \
+  octoblu/octo-master
+
+[Install]
+WantedBy=multi-user.target
