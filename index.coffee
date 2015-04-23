@@ -16,6 +16,10 @@ MESSAGE_SCHEMA =
 
 OPTIONS_SCHEMA = {}
 
+COMMANDS =
+  'create-octo': 'create'
+  'delete-octo': 'delete'
+
 class Plugin extends EventEmitter
   constructor: ->
     @options = {}
@@ -24,9 +28,10 @@ class Plugin extends EventEmitter
 
   onMessage: (message) =>
     {uuid,token} = message.payload
+    command = COMMANDS[message.topic]
 
     gatebluContainer = new GatebluContainer uuid: uuid, token: token
-    gatebluContainer.start()
+    gatebluContainer[command]()
 
   onConfig: (device) =>
     @setOptions device.options

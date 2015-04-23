@@ -3,8 +3,14 @@ class GatebluContainer
     @spawn = dependencies.spawn ? require('child_process').spawn
     {@uuid,@token} = options
 
-  start: =>
-    @childProcess = @spawn "kubectl.sh", ["create", "-f", "-"]
+  create: =>
+    @sendKubeCommand 'create'
+
+  delete: =>
+    @sendKubeCommand 'stop'
+
+  sendKubeCommand: (command) ->
+    @childProcess = @spawn "kubectl.sh", [command, "-f", "-"]
     @childProcess.stdout.pipe process.stdout
     @childProcess.stderr.pipe process.stderr
     @childProcess.stdin.write JSON.stringify @controller()

@@ -6,8 +6,8 @@ docker run -it \
   --rm \
   --name octo-master \
   -e DEBUG=octo-master* \
-  -e MESHBLU_DEVICE_UUID=bb834050-e546-11e4-869f-8d68b2238a65 \
-  -e MESHBLU_DEVICE_TOKEN=fc617e88b357545ef7f8982f0b373fd577c11132 \
+  -e MESHBLU_DEVICE_UUID=fc6da000-dd81-11e4-b399-ab04e144916d \
+  -e MESHBLU_DEVICE_TOKEN=f5e95ef1a9f03c049cae544ae3e47f3df08dfb8a \
   -e KUBERNETES_PROVIDER=aws \
   -e KUBERNETES_MASTER=https://52.11.220.249 \
   -v /Users/octoblu/tmp/kubernetes:/root/.kube \

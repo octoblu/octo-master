@@ -8,14 +8,26 @@ describe 'GatebluContainer', ->
       stderr: pipe: sinon.spy()
     @dependencies = spawn: sinon.stub().returns(@childProcess)
 
-  describe '->start', ->
+  describe '->create', ->
     describe 'when called', ->
       beforeEach ->
         @sut = new GatebluContainer {}, @dependencies
-        @sut.start()
+        @sut.create()
 
       it 'should call spawn with the kubectl command', ->
         expect(@dependencies.spawn).to.have.been.calledWith "kubectl.sh", ["create", "-f", "-"]
+
+      it 'should call stdin write on the childProcess', ->
+        expect(@childProcess.stdin.write).to.have.been.called
+
+  describe '->delete', ->
+    describe 'when called', ->
+      beforeEach ->
+        @sut = new GatebluContainer {}, @dependencies
+        @sut.delete()
+
+      it 'should call spawn with the kubectl command', ->
+        expect(@dependencies.spawn).to.have.been.calledWith "kubectl.sh", ["stop", "-f", "-"]
 
       it 'should call stdin write on the childProcess', ->
         expect(@childProcess.stdin.write).to.have.been.called
