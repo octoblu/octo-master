@@ -12,6 +12,8 @@ ExecStart=/bin/sh -c '/usr/bin/docker run \
   --name octo-master \
   -v /var/run/fleet.sock:/var/run/fleet.sock \
   -e DEBUG=octo-master* \
+  -e MESHBLU_HOST=$(/usr/bin/etcdctl get /meshblu/host) \
+  -e MESHBLU_PORT=$(/usr/bin/etcdctl get /meshblu/port) \
   -e MESHBLU_DEVICE_UUID=$(/usr/bin/etcdctl get /octo-master/uuid) \
   -e MESHBLU_DEVICE_TOKEN=$(/usr/bin/etcdctl get /octo-master/token) \
   octoblu/octo-master'
