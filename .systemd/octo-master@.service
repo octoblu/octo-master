@@ -5,10 +5,10 @@ Requires=docker.service
 
 [Service]
 TimeoutStartSec=300
-ExecStartPre=-/usr/bin/docker kill octo-master
-ExecStartPre=-/usr/bin/docker kill register-octo-master-1
-ExecStartPre=-/usr/bin/docker rm octo-master
-ExecStartPre=-/usr/bin/docker rm register-octo-master-1
+ExecStartPre=-/usr/bin/docker kill octo-master-%i
+ExecStartPre=-/usr/bin/docker kill register-octo-master-%i
+ExecStartPre=-/usr/bin/docker rm octo-master-%i
+ExecStartPre=-/usr/bin/docker rm register-octo-master-%i
 ExecStartPre=/usr/bin/docker pull octoblu/octo-master
 ExecStartPre=/usr/bin/docker pull octoblu/meshblu-util:register
 ExecStartPre=/usr/bin/etcdctl get /meshblu/host || /usr/bin/echo "etcd did not contain /meshblu/host"
@@ -16,22 +16,22 @@ ExecStartPre=/usr/bin/etcdctl get /meshblu/port || /usr/bin/echo "etcd did not c
 ExecStartPre=/usr/bin/etcdctl get /octoblu/uuid || /usr/bin/echo "etcd did not contain /octoblu/uuid"
 ExecStartPre=/bin/sh -c '/usr/bin/docker run \
   --rm \
-  --name register-octo-master-1 \
+  --name register-octo-master-%i \
   octoblu/meshblu-util:register \
     --meshblu-host $(/usr/bin/etcdctl get /meshblu/host) \
     --meshblu-port $(/usr/bin/etcdctl get /meshblu/port) \
     --owner-uuid $(/usr/bin/etcdctl get /octoblu/uuid) \
     --type octoblu:octo-master \
     --etcd-peer http://$(/usr/bin/ifconfig docker0 | grep "inet " | awk "{print \$2}"):4001 \
-    --etcd-dir octo-master-1'
+    --etcd-dir octo-master-%i'
 ExecStart=/bin/sh -c '/usr/bin/docker run \
-  --name octo-master \
+  --name octo-master-%i \
   -v /var/run/fleet.sock:/var/run/fleet.sock \
   -e DEBUG=octo-master* \
   -e MESHBLU_HOST=$(/usr/bin/etcdctl get /meshblu/host) \
   -e MESHBLU_PORT=$(/usr/bin/etcdctl get /meshblu/port) \
-  -e MESHBLU_DEVICE_UUID=$(/usr/bin/etcdctl get /octo-master-1/uuid) \
-  -e MESHBLU_DEVICE_TOKEN=$(/usr/bin/etcdctl get /octo-master-1/token) \
+  -e MESHBLU_DEVICE_UUID=$(/usr/bin/etcdctl get /octo-master-%i/uuid) \
+  -e MESHBLU_DEVICE_TOKEN=$(/usr/bin/etcdctl get /octo-master-%i/token) \
   octoblu/octo-master'
 
 [Install]
