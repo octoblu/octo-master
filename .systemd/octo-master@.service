@@ -11,9 +11,9 @@ ExecStartPre=-/usr/bin/docker rm octo-master-%i
 ExecStartPre=-/usr/bin/docker rm register-octo-master-%i
 ExecStartPre=/usr/bin/docker pull octoblu/octo-master
 ExecStartPre=/usr/bin/docker pull octoblu/meshblu-util:register
-ExecStartPre=/usr/bin/etcdctl get /meshblu/host || /usr/bin/echo "etcd did not contain /meshblu/host"
-ExecStartPre=/usr/bin/etcdctl get /meshblu/port || /usr/bin/echo "etcd did not contain /meshblu/port"
-ExecStartPre=/usr/bin/etcdctl get /octoblu/uuid || /usr/bin/echo "etcd did not contain /octoblu/uuid"
+ExecStartPre=/usr/bin/etcdctl get /meshblu/host || /usr/bin/echo "etcd did not contain /meshblu/host" && exit 1
+ExecStartPre=/usr/bin/etcdctl get /meshblu/port || /usr/bin/echo "etcd did not contain /meshblu/port" && exit 1
+ExecStartPre=/usr/bin/etcdctl get /octoblu/uuid || /usr/bin/echo "etcd did not contain /octoblu/uuid" && exit 1
 ExecStartPre=/bin/sh -c '/usr/bin/docker run \
   --rm \
   --name register-octo-master-%i \
