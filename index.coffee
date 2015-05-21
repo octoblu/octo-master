@@ -2,7 +2,7 @@
 util           = require 'util'
 {EventEmitter} = require 'events'
 debug          = require('debug')('octo-master:index')
-GatebluContainer = require './gateblu-container'
+Container = require './container'
 
 MESSAGE_SCHEMA =
   type: 'object'
@@ -17,8 +17,10 @@ MESSAGE_SCHEMA =
 OPTIONS_SCHEMA = {}
 
 COMMANDS =
+  'create': 'create'
+  'delete': 'delete'
   'create-octo': 'createOcto'
-  'delete-octo': 'deleteOcto'
+  'delete-octo': 'delete'
   'generate': 'generate'
 
 class Plugin extends EventEmitter
@@ -29,11 +31,11 @@ class Plugin extends EventEmitter
 
   onMessage: (message) =>
     debug 'onMessage', message
-    {uuid,token} = message.payload
+    {uuid,token,image} = message.payload
     command = COMMANDS[message.topic]
 
-    gatebluContainer = new GatebluContainer uuid: uuid, token: token
-    gatebluContainer[command]()
+    gatebluContainer = new Container uuid: uuid, token: token
+    gatebluContainer[command](image)
 
   onConfig: (device) =>
     @setOptions device.options

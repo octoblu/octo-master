@@ -4,6 +4,7 @@ After=docker.service
 Requires=docker.service
 
 [Service]
+User=core
 TimeoutStartSec=300
 ExecStartPre=-/usr/bin/docker kill octo-<%= @uuid %>
 ExecStartPre=-/usr/bin/docker rm octo-<%= @uuid %>
@@ -14,4 +15,4 @@ ExecStart=/bin/sh -c '/usr/bin/docker run \
   -e MESHBLU_PORT=$(/usr/bin/etcdctl get /meshblu/port) \
   -e MESHBLU_UUID=<%= @uuid %> \
   -e MESHBLU_TOKEN=<%= @token %> \
-  octoblu/gateblu-forever'
+  <%= @image %>'
