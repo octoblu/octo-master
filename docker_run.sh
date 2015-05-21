@@ -2,13 +2,13 @@
 
 docker build -t octoblu/octo-master:devel .
 
+docker stop octo-master &> /dev/null
+docker rm octo-master &> /dev/null
 docker run -it \
-  --rm \
   --name octo-master \
+  --detach \
   -e DEBUG=octo-master* \
-  -e MESHBLU_DEVICE_UUID=fc6da000-dd81-11e4-b399-ab04e144916d \
-  -e MESHBLU_DEVICE_TOKEN=f5e95ef1a9f03c049cae544ae3e47f3df08dfb8a \
-  -e KUBERNETES_PROVIDER=aws \
-  -e KUBERNETES_MASTER=https://52.11.220.249 \
-  -v /Users/octoblu/tmp/kubernetes:/root/.kube \
+  -e MESHBLU_DEVICE_UUID=0b6968f0-a147-4f95-a4d0-8a99a0a937f9 \
+  -e MESHBLU_DEVICE_TOKEN=0efe24cd5c8ee974dad8aeadffe15fa2d3c7223e \
+  -v /var/run/fleet.sock:/var/run/fleet.sock \
   octoblu/octo-master:devel $@

@@ -28,6 +28,7 @@ class Plugin extends EventEmitter
     @optionsSchema = OPTIONS_SCHEMA
 
   onMessage: (message) =>
+    debug 'onMessage', message
     {uuid,token} = message.payload
     command = COMMANDS[message.topic]
 
