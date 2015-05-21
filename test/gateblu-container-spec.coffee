@@ -1,3 +1,3 @@
-GatebluContainer = require '../gateblu-container'
+Container = require '../container'
 
-describe 'GatebluContainer', ->
+describe 'Container', ->
