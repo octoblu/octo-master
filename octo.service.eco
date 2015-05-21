@@ -7,7 +7,7 @@ Requires=docker.service
 TimeoutStartSec=300
 ExecStartPre=-/usr/bin/docker kill octo-<%= @uuid %>
 ExecStartPre=-/usr/bin/docker rm octo-<%= @uuid %>
-ExecStartPre=/usr/bin/docker pull octoblu/gateblu-forever
+ExecStartPre=/usr/bin/docker pull <%= @image %>
 ExecStart=/bin/sh -c '/usr/bin/docker run \
   --name octo-<%= @uuid %> \
   -e MESHBLU_SERVER=$(/usr/bin/etcdctl get /meshblu/host) \

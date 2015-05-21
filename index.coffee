@@ -17,8 +17,8 @@ MESSAGE_SCHEMA =
 OPTIONS_SCHEMA = {}
 
 COMMANDS =
-  'create-octo': 'create'
-  'delete-octo': 'delete'
+  'create-octo': 'createOcto'
+  'delete-octo': 'deleteOcto'
   'generate': 'generate'
 
 class Plugin extends EventEmitter
