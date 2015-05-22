@@ -4,8 +4,11 @@ After=docker.service
 Requires=docker.service
 
 [Service]
-User=core
 TimeoutStartSec=300
+ExecStartPre=/bin/sh -c '/usr/bin/docker login \
+  --username $(/usr/bin/etcdctl get /docker/username) \
+  --password $(/usr/bin/etcdctl get /docker/password) \
+  --email $(/usr/bin/etcdctl get /docker/email)'
 ExecStartPre=-/usr/bin/docker kill octo-<%= @uuid %>
 ExecStartPre=-/usr/bin/docker rm octo-<%= @uuid %>
 ExecStartPre=/usr/bin/docker pull <%= @image %>

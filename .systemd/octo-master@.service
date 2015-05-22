@@ -37,3 +37,6 @@ ExecStart=/bin/sh -c '/usr/bin/docker run \
 
 [Install]
 WantedBy=multi-user.target
+
+[X-Fleet]
+Conflicts=octo-master@*.service
