@@ -16,11 +16,6 @@ MESSAGE_SCHEMA =
 
 OPTIONS_SCHEMA = {}
 
-COMMANDS =
-  'create': 'create'
-  'delete': 'delete'
-  'generate': 'generate'
-
 class Plugin extends EventEmitter
   constructor: ->
     @options = {}
@@ -30,10 +25,9 @@ class Plugin extends EventEmitter
   onMessage: (message) =>
     debug 'onMessage', message
     {uuid,token,image} = message.payload
-    command = COMMANDS[message.topic]
 
-    gatebluContainer = new Container uuid: uuid, token: token, image: image
-    gatebluContainer[command]()
+    container = new Container uuid: uuid, token: token, image: image
+    container[message.topic]()
 
   onConfig: (device) =>
     @setOptions device.options

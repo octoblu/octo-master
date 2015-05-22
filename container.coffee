@@ -17,11 +17,15 @@ class Container
             console.error stderr
             serviceFile.close()
 
-  createOcto: =>
-    @create 'octoblu/gateblu-forever'
-
   delete: (callback=->) =>
     exec "fleetctl destroy octo-#{@uuid}.service", (error, stdout, stderr) =>
+      console.error('exec error:', error.message) if error?
+      console.log stdout
+      console.error stderr
+      callback error
+
+  pull: (callback=->) =>
+    exec "docker pull #{@image}", (error, stdout, stderr) =>
       console.error('exec error:', error.message) if error?
       console.log stdout
       console.error stderr
