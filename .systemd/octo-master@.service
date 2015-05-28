@@ -5,6 +5,7 @@ Requires=docker.service
 
 [Service]
 TimeoutStartSec=300
+Restart=always
 ExecStartPre=/bin/sh -c '/usr/bin/docker login \
   --username $(/usr/bin/etcdctl get /docker/username) \
   --password $(/usr/bin/etcdctl get /docker/password) \
