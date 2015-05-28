@@ -19,7 +19,8 @@ ExecStartPre=/usr/bin/docker pull octoblu/flow-runner:latest
 ExecStartPre=/usr/bin/etcdctl get /meshblu/host || /usr/bin/echo "etcd did not contain /meshblu/host" && exit 1
 ExecStartPre=/usr/bin/etcdctl get /meshblu/port || /usr/bin/echo "etcd did not contain /meshblu/port" && exit 1
 ExecStartPre=/usr/bin/etcdctl get /octoblu/uuid || /usr/bin/echo "etcd did not contain /octoblu/uuid" && exit 1
-ExecStartPre=/bin/sh -c '/usr/bin/docker run \
+ExecStartPre=/bin/sh -c '/usr/bin/etcdctl get /octo-master-%i/token || \
+  /usr/bin/docker run \
   --rm \
   --name register-octo-master-%i \
   octoblu/meshblu-util:register \
