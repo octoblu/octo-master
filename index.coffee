@@ -27,7 +27,7 @@ class Plugin extends EventEmitter
     {uuid,token,image} = message.payload
 
     container = new Container uuid: uuid, token: token, image: image
-    container[message.topic]()
+    container[message.topic]?()
 
   onConfig: (device) =>
     @setOptions device.options
