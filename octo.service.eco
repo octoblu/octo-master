@@ -11,7 +11,7 @@ ExecStartPre=/bin/sh -c '/usr/bin/docker login \
   --email $(/usr/bin/etcdctl get /docker/email)'
 ExecStartPre=-/usr/bin/docker kill octo-<%= @uuid %>
 ExecStartPre=-/usr/bin/docker rm octo-<%= @uuid %>
-ExecStartPre=/usr/bin/docker pull <%= @image %>
+# ExecStartPre=/usr/bin/docker pull <%= @image %>
 ExecStart=/bin/sh -c '/usr/bin/docker run \
   --name octo-<%= @uuid %> \
   -e MESHBLU_SERVER=$(/usr/bin/etcdctl get /meshblu/host) \
@@ -19,6 +19,7 @@ ExecStart=/bin/sh -c '/usr/bin/docker run \
   -e AIRBRAKE_KEY=$(/usr/bin/etcdctl get /airbrake/key) \
   -e MESHBLU_UUID=<%= @uuid %> \
   -e MESHBLU_TOKEN=<%= @token %> \
+  -e NODE_ENV=$(/usr/bin/etcdctl get /node/env) \
   <%= @image %>'
 
 [X-Fleet]
