@@ -47,4 +47,4 @@ WantedBy=multi-user.target
 
 [X-Fleet]
 Conflicts=octo-master@*.service
-MachineMetadata=available=true
+MachineMetadata=Role=octo-runner

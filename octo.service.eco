@@ -23,4 +23,4 @@ ExecStart=/bin/sh -c '/usr/bin/docker run \
   <%= @image %>'
 
 [X-Fleet]
-MachineMetadata=available=true
+MachineMetadata=Role=octo-runner
