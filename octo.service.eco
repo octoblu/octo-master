@@ -5,13 +5,9 @@ Requires=docker.service
 
 [Service]
 TimeoutStartSec=300
-# ExecStartPre=/bin/sh -c '/usr/bin/docker login \
-#   --username $(/usr/bin/etcdctl get /docker/username) \
-#   --password $(/usr/bin/etcdctl get /docker/password) \
-#   --email $(/usr/bin/etcdctl get /docker/email)'
+TimeoutStopSec=300
 ExecStartPre=-/usr/bin/docker kill octo-<%= @uuid %>
 ExecStartPre=-/usr/bin/docker rm octo-<%= @uuid %>
-# ExecStartPre=/usr/bin/docker pull <%= @image %>
 ExecStart=/bin/sh -c '/usr/bin/docker run \
   --name octo-<%= @uuid %> \
   -e MESHBLU_SERVER=$(/usr/bin/etcdctl get /meshblu/host) \
@@ -21,6 +17,13 @@ ExecStart=/bin/sh -c '/usr/bin/docker run \
   -e MESHBLU_TOKEN=<%= @token %> \
   -e NODE_ENV=$(/usr/bin/etcdctl get /node/env) \
   <%= @image %>'
+ExecStop=/bin/sh -c '/usr/bin/docker run \
+  --rm \
+  -e MESHBLU_SERVER=$(/usr/bin/etcdctl get /meshblu/host) \
+  -e MESHBLU_PORT=$(/usr/bin/etcdctl get /meshblu/port) \
+  -e MESHBLU_UUID=<%= @uuid %> \
+  -e MESHBLU_TOKEN=<%= @token %> \
+  octoblu/flow-util:entrypoint savepause'
 
 [X-Fleet]
 MachineMetadata=Role=octo-runner

@@ -1,0 +1,5 @@
+.git
+.aws
+.kubernetes
+.systemd
+node_modules
