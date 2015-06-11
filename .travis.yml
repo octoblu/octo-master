@@ -8,7 +8,7 @@ node_js:
 - '0.10'
 env:
   global:
-  - AWS_ACCESS_KEY_ID=AKIAIT4X4NDGM2WVL6VA
+  - AWS_ACCESS_KEY_ID=AKIAJH2D5IPIRHYJT5IA
   - DOCKER_USERNAME=octoblu
   - DEPLOY_APPLICATION_NAME=octo-master
   - DEPLOY_REGION=us-west-2
@@ -18,23 +18,23 @@ env:
   - MESHBLU_SERVER=meshblu.octoblu.com
   - MESHBLU_PORT=443
   - MESHBLU_DEVICE_UUID=fc6da000-dd81-11e4-b399-ab04e144916d
-  - secure: Tcmtp5MyDyniTSta4STysL3no45OK2KlJGM1U0Sp1S1Gr5oCe/gbms5AxTQjTWgvbkIAVVKveigWPYGvisSG52OYeg50k5c4DuznKqH2v2ZoOianDCsb4qwdyNNr+qARUvgW7Jbv2HF9+vM8jXSAzaXMGkpgbi3IgwBv8Kkf5iE=
   - secure: hCzA7I2oPX+J1Gzs9+cND8NYPSIsTHdKviHAPkXpuYIGHpxPlITUK4JrGFpRhgt99xz0ncF8BR4HT6aFxvTctCSw8Owrbw+YCD4zmIjQlkzFnb9th/AjHKkaj+bmiitPLTy+jPFD6E1AVXFri29eAg8Sx1JX0jzwzgb9HY16vAQ=
-  - secure: Or7io5tsAEscUwUt/X8MiF1B13MT5GIOtge2WbYQj9CXR38jIkmYd+HOc4iI84L65TYq55AapAW2Lh4qlLLU98RB7JQE30UHjjbr5raiqz5KdFDkwoJYcnyRTyc07LTT7Qn1VQL0m7GJQC27k56CLPVCnWnfM1AhA0QBqIKQDIY= # MESHBLU_DEVICE_TOKEN=
+  - secure: Or7io5tsAEscUwUt/X8MiF1B13MT5GIOtge2WbYQj9CXR38jIkmYd+HOc4iI84L65TYq55AapAW2Lh4qlLLU98RB7JQE30UHjjbr5raiqz5KdFDkwoJYcnyRTyc07LTT7Qn1VQL0m7GJQC27k56CLPVCnWnfM1AhA0QBqIKQDIY=
+  - secure: VPEHRgg0fQaHBnu3MU4nvPV05diqR8e1ArBBBlK+eacd2QziLgPoRt5lfFak/eZMPqWyY3V47jqzDGEw7VkV8fVesIUWE3aDK/VhowdsAE7M5T69PAhBjl6dYS0JUVi66J2i1CbanJnjlkUnf5kM61pM1Ddf7OHx7bYM2+G9d2M=
 after_success:
 - .kubernetes/travis_after_success
 deploy:
 - provider: s3
-  access_key_id: AKIAIT4X4NDGM2WVL6VA
+  access_key_id: AKIAJH2D5IPIRHYJT5IA
   secret_access_key: &1
-    secure: OO/stCY+p5whF30Dq8NqMsgdvWz3zohSwlcD6GqZRhrirsP522xf6oo4fh7CeWq1h8D6gceVtJL05fMqsXADpVY/E6NZWYJoLIVjjCoqdsYV7ZP78qggXz0pKK1ObXhn7woznE8ONNQVbDAnakOcI7hf8I4MXIhLdgwZLcHcRH4=
+    secure: ZwAd/SNjNTLA3CJ/J4NXrevZpoq/aclKWpyAdFu8lD1UCNxrkedE2v3ryIiW4CILjeOgcDROFLyTFzqTSpskDccu7VZS7gFjBG0lOdE7NcF2vnXGm58bW2YAGEX5x8SZEE+4pWpcvTItx9Toho6i0HFCULMkHYaIq3P39x9YgBk=
   local_dir: dpl_cd_upload
   skip_cleanup: true
   bucket: octoblu-deploy
   on:
     branch: master
 - provider: codedeploy
-  access_key_id: AKIAIT4X4NDGM2WVL6VA
+  access_key_id: AKIAJH2D5IPIRHYJT5IA
   secret_access_key: *1
   bucket: octoblu-deploy
   key: docker-builder/octo-master-$TRAVIS_COMMIT.zip
