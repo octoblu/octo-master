@@ -25,7 +25,7 @@ class Container
       callback error
 
   pull: (callback=->) =>
-    exec "docker pull #{@image}", (error, stdout, stderr) =>
+    exec "fleetctl start global-flow-runner-update.service", (error, stdout, stderr) =>
       console.error('exec error:', error.message) if error?
       console.log stdout
       console.error stderr
