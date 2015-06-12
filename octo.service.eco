@@ -17,12 +17,14 @@ ExecStart=/bin/sh -c '/usr/bin/docker run \
   -e MESHBLU_TOKEN=<%= @token %> \
   -e NODE_ENV=$(/usr/bin/etcdctl get /node/env) \
   <%= @image %>'
-ExecStop=/bin/sh -c '/usr/bin/docker run \
-  --rm \
-  -e MESHBLU_SERVER=$(/usr/bin/etcdctl get /meshblu/host) \
-  -e MESHBLU_PORT=$(/usr/bin/etcdctl get /meshblu/port) \
-  -e MESHBLU_UUID=<%= @uuid %> \
-  -e MESHBLU_TOKEN=<%= @token %> \
+ExecStop=/bin/sh -c '/usr/bin/echo "Saving state" && \
+  /usr/bin/docker run \
+    --rm \
+    -e FLOW_DEPLOY_SERVICE_BASE_URI=$(/usr/bin/etcdctl get /flow-deploy-service/base-uri) \
+    -e MESHBLU_SERVER=$(/usr/bin/etcdctl get /meshblu/host) \
+    -e MESHBLU_PORT=$(/usr/bin/etcdctl get /meshblu/port) \
+    -e MESHBLU_UUID=<%= @uuid %> \
+    -e MESHBLU_TOKEN=<%= @token %> \
   octoblu/flow-util:entrypoint savepause'
 
 [X-Fleet]
