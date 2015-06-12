@@ -1,0 +1,15 @@
+[Unit]
+Description=Flow Runner Update
+
+[Service]
+Type=oneshot
+TimeoutStartSec=0
+ExecStartPre=/bin/sh -c '/usr/bin/docker login \
+  --username $(/usr/bin/etcdctl get /docker/username) \
+  --password $(/usr/bin/etcdctl get /docker/password) \
+  --email $(/usr/bin/etcdctl get /docker/email)'
+ExecStart=/bin/sh -c \
+  "/usr/bin/docker pull octoblu/flow-runner:latest"
+
+[X-Fleet]
+Global=true
