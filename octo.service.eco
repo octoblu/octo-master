@@ -4,6 +4,7 @@ After=docker.service
 Requires=docker.service
 
 [Service]
+KillSignal=SIGINT
 TimeoutStartSec=300
 TimeoutStopSec=300
 ExecStartPre=-/usr/bin/docker kill octo-<%= @uuid %>
