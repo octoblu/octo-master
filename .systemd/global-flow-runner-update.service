@@ -3,7 +3,7 @@ Description=Flow Runner Update
 
 [Service]
 Type=oneshot
-TimeoutStartSec=0
+TimeoutStartSec=300
 ExecStartPre=/bin/sh -c '/usr/bin/docker login \
   --username $(/usr/bin/etcdctl get /docker/username) \
   --password $(/usr/bin/etcdctl get /docker/password) \
