@@ -10,6 +10,7 @@ Connector = (config) ->
     token  : config.token
 
   consoleError = (error) ->
+    console.error error
     console.error error.message
     console.error error.stack
 
