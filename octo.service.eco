@@ -16,6 +16,7 @@ ExecStart=/bin/sh -c '/usr/bin/docker run \
   -e AIRBRAKE_KEY=$(/usr/bin/etcdctl get /airbrake/key) \
   -e MESHBLU_UUID=<%= @uuid %> \
   -e MESHBLU_TOKEN=<%= @token %> \
+  -e OCTOBLU_URI=$(/usr/bin/etcdctl get /octoblu/uri) \
   -e NODE_ENV=$(/usr/bin/etcdctl get /node/env) \
   <%= @image %>'
 ExecStop=/bin/sh -c '/usr/bin/echo "Saving state" && \
