@@ -40,7 +40,6 @@ ExecStart=/bin/sh -c '/usr/bin/docker run \
   -e MESHBLU_PORT=$(/usr/bin/etcdctl get /meshblu/port) \
   -e MESHBLU_DEVICE_UUID=$(/usr/bin/etcdctl get /octo-master-%i/uuid) \
   -e MESHBLU_DEVICE_TOKEN=$(/usr/bin/etcdctl get /octo-master-%i/token) \
-  -e DEBUG=octo-master* \
   octoblu/octo-master:latest'
 
 [Install]
