@@ -17,6 +17,8 @@ Connector = (config) ->
   process.on 'uncaughtException', consoleError
   conx.on 'notReady', consoleError
   conx.on 'error', consoleError
+  conx.on 'disconnect', =>
+    debug 'disconnect', arguments
 
   plugin = new Plugin();
 
