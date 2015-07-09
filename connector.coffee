@@ -8,6 +8,8 @@ Connector = (config) ->
     port   : config.port
     uuid   : config.uuid
     token  : config.token
+    options:
+      transports: ['websocket']
 
   consoleError = (error) ->
     console.error error
