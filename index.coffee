@@ -28,12 +28,20 @@ class Plugin extends EventEmitter
 
     container = new Container uuid: uuid, token: token, image: image
     container[message.topic]?()
+    container.on 'step-change', @sendStepChangeMessage
 
   onConfig: (device) =>
     @setOptions device.options
 
   setOptions: (options={}) =>
     @options = options
+
+  sendStepChangeMessage: (message={}) =>
+    @emit 'message',
+      devices: [message.uuid]
+      topic: 'step-change'
+      payload:
+        step: message.step
 
 module.exports =
   messageSchema: MESSAGE_SCHEMA
