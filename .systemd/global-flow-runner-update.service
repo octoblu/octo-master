@@ -12,3 +12,4 @@ ExecStart=/bin/sh -c "/usr/bin/docker pull octoblu/flow-runner:latest"
 
 [X-Fleet]
 Global=true
+MachineMetadata=Role=octo-runner
