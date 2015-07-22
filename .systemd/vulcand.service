@@ -6,13 +6,13 @@ Wants=docker.service
 TimeoutStartSec=0
 ExecStartPre=-/usr/bin/docker kill vulcand
 ExecStartPre=-/usr/bin/docker rm vulcand
-ExecStartPre=/usr/bin/docker pull octoblu/vulcand:latest
+ExecStartPre=/usr/bin/docker pull quay.io/octoblu/vulcand:latest
 ExecStart=/usr/bin/sh -c "/usr/bin/docker run    \
   --rm \
   --name vulcand \
   -p 80:8181 \
   -p 8182:8182 \
-  octoblu/vulcand:latest \
+  quay.io/octoblu/vulcand:latest \
   /go/bin/vulcand \
     -apiInterface=0.0.0.0 \
     -interface=0.0.0.0 \
